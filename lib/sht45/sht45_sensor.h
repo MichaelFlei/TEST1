@@ -4,12 +4,13 @@ class TemperatureSensor : public Sensor {
 private:
   static SensirionI2cSht4x sht;
 public:
+  float temp, hum;
+  int c = 0;
     bool initialize() override {
         sht.begin(Wire, SHT45_I2C_ADDR_44);
     }
-   double measure(){
+   void measure() override {
     float temperature, humidity;      
     sht.measureLowestPrecision(temperature, humidity);
-    return temperature;
    }
 };
